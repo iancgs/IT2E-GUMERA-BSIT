@@ -2,6 +2,9 @@ package rental;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Rental {
     Scanner sc = new Scanner(System.in);
@@ -14,7 +17,8 @@ public class Rental {
             System.out.println("2. Display Properties");
             System.out.println("3. Update Property");
             System.out.println("4. Delete Property");
-            System.out.println("5. Exit");
+            System.out.println("5. Select Property");
+            System.out.println("6. Exit");
 
             System.out.print("Enter action: ");
             action = sc.nextInt();
@@ -38,6 +42,10 @@ public class Rental {
                     break;
 
                 case 5:
+                    selectRental();
+                    break;
+                    
+                case 6:
                     System.out.println("Exiting...");
                     break;
 
@@ -105,6 +113,51 @@ public class Rental {
         String qry = "DELETE FROM tbl_Tenant WHERE r_id = ?";
         conf.deleteRecord(qry, id);
         System.out.println("Property deleted successfully.\n");
+    }
+    
+    public void selectRental(){
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+
+
+        while (conf.getSingleValue("SELECT r_id FROM tbl_Tenant WHERE r_id = ?", id) == 0) {
+            System.out.println("Selected ID doesn't exist!");
+            System.out.print("Select tenant ID again: ");
+            id = sc.nextInt();
+            sc.nextLine(); 
+        }
+        
+        String qry = "SELECT * FROM tbl_Tenant WHERE r_id = ?";
+        
+        try{
+            PreparedStatement findRow = conf.connectDB().prepareStatement(qry);
+            findRow.setInt(1, id);
+            
+            try(ResultSet rs = findRow.executeQuery()){
+                int rid = rs.getInt("r_id");
+                String rname = rs.getString("r_name");
+                String rdate = rs.getString("r_date");
+                String raddress = rs.getString("r_address");
+                String rduration = rs.getString("r_duration");
+                String rstatus = rs.getString("r_status");
+                
+                System.out.println("\nTenant Information: ");
+                System.out.println("-------------------------------------");
+                System.out.println("ID: "+rid);
+                System.out.println("Name: "+rname);
+                System.out.println("Date: "+rdate);
+                System.out.println("Address: "+raddress);
+                System.out.println("Duration: "+rduration);
+                System.out.println("-------------------------------------");
+                System.out.println("Status: "+rstatus);
+
+            }
+            
+            
+          
+        } catch(SQLException e){
+            System.out.println("Error: "+e.getMessage());
+        }
     }
     
 
