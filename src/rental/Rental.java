@@ -27,6 +27,7 @@ public class Rental {
             switch(action) {      
                 case 1:
                     addRental();
+                    viewRental();
                     break;
 
                 case 2:
@@ -34,25 +35,29 @@ public class Rental {
                     break;
 
                 case 3:  
+                    viewRental();
                     updateRental();
+                    viewRental();
                     break;
                     
                 case 4:
+                    viewRental();
                     deleteRental();
+                    viewRental();
                     break;
 
                 case 5:
                     selectRental();
                     break;
                     
-                case 6:
+                case 6:                            
                     System.out.println("Exiting...");
                     break;
 
                 default:
                     System.out.print("Invalid action. Please try again.");
             }
-        } while(action != 5);
+        } while(action != 6);
     }
 
     public void addRental() {

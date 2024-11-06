@@ -4,6 +4,7 @@ package rental;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import payment.payment;
 
 public class Main {
     config conf = new config();
@@ -12,6 +13,7 @@ public class Main {
             Scanner sc = new Scanner(System.in);
      
         Rental rent = new Rental();
+        payment pay = new payment();
         
         int op = -1; 
         
@@ -23,7 +25,8 @@ public class Main {
    
 
                 System.out.println("1. RENTAL ");
-                System.out.println("2. EXIT ");
+                System.out.println("2. PAYMENT");
+                System.out.println("3. EXIT ");
 
                 System.out.print("\nSelect an Option: ");
                 op = sc.nextInt();
@@ -33,8 +36,11 @@ public class Main {
                     case 1:
                         rent.rentaltransac();
                         break;
-
+                        
                     case 2:
+                        pay.paymentTransaction();                                          
+                        
+                    case 3:
                         System.out.println("Exiting....");
                         break;
 
