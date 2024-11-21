@@ -1,11 +1,12 @@
 package payment;
 
 import java.util.Scanner;
-import rental.config;
+import rental.rentals;
 
 public class payment {
     Scanner sc = new Scanner(System.in);
     payments p = new payments();
+    rentals r = new rentals();
 
     public void paymentTransaction() {
         int action;
@@ -23,6 +24,7 @@ public class payment {
 
             switch(action) {
                 case 1:
+                    r.viewRental();
                     p.addPayment();
                     p.viewPayments();
                     break;
