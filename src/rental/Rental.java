@@ -9,12 +9,13 @@ public class Rental {
     public void rentaltransac() {
         int action;
         do {
-            System.out.println("1. Add Property");
-            System.out.println("2. Display Properties");
-            System.out.println("3. Update Property");
-            System.out.println("4. Delete Property");
-            System.out.println("5. Select Property");
+            System.out.println("1. Add Rental");
+            System.out.println("2. Display Rentals");
+            System.out.println("3. Update Rental");
+            System.out.println("4. Delete Rental");
+            System.out.println("5. Select Rental");
             System.out.println("6. Exit");
+
 
             System.out.print("Enter action: ");
             action = sc.nextInt();
